@@ -1,0 +1,100 @@
+"""
+COS202 Assignment
+PERSONAL POCKET CGPA CALCULATOR (PPC)
+Uses selection control statements (if/elif) to convert scores into
+grades and grade points, then computes the CGPA.
+"""
+
+def get_grade_point(score):
+    """
+    Uses selection control statements to convert a score (0-100)
+    into a letter grade and its corresponding grade point (5-point scale).
+    """
+    if score >= 70:
+        return "A", 5
+    elif score >= 60:
+        return "B", 4
+    elif score >= 50:
+        return "C", 3
+    elif score >= 45:
+        return "D", 2
+    elif score >= 40:
+        return "E", 1
+    else:
+        return "F", 0
+
+
+def main():
+    print("=========================================")
+    print("   PERSONAL POCKET CGPA CALCULATOR (PPC)")
+    print("=========================================")
+
+    total_points = 0      # sum of (grade point x credit unit)
+    total_units = 0        # sum of credit units
+    course_count = 1
+
+    while True:
+        print(f"\n--- Course {course_count} ---")
+        course_name = input("Enter course code/name (or type DONE to finish): ").strip()
+
+        if course_name.upper() == "DONE":
+            break
+
+        try:
+            score = float(input("Enter score for this course (0-100): "))
+            if score < 0 or score > 100:
+                print("Invalid score! Must be between 0 and 100. Try again.")
+                continue
+
+            credit_unit = float(input("Enter credit unit for this course: "))
+            if credit_unit <= 0:
+                print("Invalid credit unit! Must be greater than 0. Try again.")
+                continue
+
+        except ValueError:
+            print("Invalid input! Please enter numeric values.")
+            continue
+
+        grade, grade_point = get_grade_point(score)
+        weighted_point = grade_point * credit_unit
+
+        total_points += weighted_point
+        total_units += credit_unit
+
+        print(f"-> {course_name}: Score={score}, Grade={grade}, "
+              f"Grade Point={grade_point}, Credit Unit={credit_unit}, "
+              f"Weighted Point={weighted_point}")
+
+        course_count += 1
+
+    if total_units == 0:
+        print("\nNo courses entered. CGPA cannot be calculated.")
+        return
+
+    cgpa = total_points / total_units
+
+    print("\n=========================================")
+    print("               RESULT SUMMARY")
+    print("=========================================")
+    print(f"Total Weighted Points : {total_points}")
+    print(f"Total Credit Units    : {total_units}")
+    print(f"Your CGPA             : {cgpa:.2f}")
+
+    if cgpa >= 4.50:
+        classification = "First Class"
+    elif cgpa >= 3.50:
+        classification = "Second Class Upper"
+    elif cgpa >= 2.40:
+        classification = "Second Class Lower"
+    elif cgpa >= 1.50:
+        classification = "Third Class"
+    else:
+        classification = "Pass"
+
+    print(f"Classification        : {classification}")
+    print("=========================================")
+    print("Thank you for using PPC!")
+
+
+if __name__ == "__main__":
+    main()
