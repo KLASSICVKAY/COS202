@@ -1,0 +1,72 @@
+"""
+COS202 Assignment
+MATHEMATICAL CALCULATOR (MC)
+A simple interactive screen calculator with +, -, *, /, ^, %, C (Clear), OFF
+"""
+
+def show_menu():
+    print("\n===================================")
+    print("     MATHEMATICAL CALCULATOR (MC)")
+    print("===================================")
+    print(" +  ->  Addition")
+    print(" -  ->  Subtraction")
+    print(" *  ->  Multiplication")
+    print(" /  ->  Division")
+    print(" ^  ->  Power (Exponent)")
+    print(" %  ->  Modulus (Remainder)")
+    print(" C  ->  Clear Screen")
+    print(" OFF -> Exit Calculator")
+    print("===================================")
+
+
+def calculate(num1, operator, num2):
+    if operator == '+':
+        return num1 + num2
+    elif operator == '-':
+        return num1 - num2
+    elif operator == '*':
+        return num1 * num2
+    elif operator == '/':
+        if num2 == 0:
+            return "Error: Division by zero is not allowed"
+        return num1 / num2
+    elif operator == '^':
+        return num1 ** num2
+    elif operator == '%':
+        if num2 == 0:
+            return "Error: Modulus by zero is not allowed"
+        return num1 % num2
+    else:
+        return "Error: Invalid operator"
+
+
+def main():
+    print("Welcome to the Mathematical Calculator (MC)!")
+
+    while True:
+        show_menu()
+        choice = input("\nEnter operator (+, -, *, /, ^, %) or C/OFF: ").strip()
+
+        if choice.upper() == "OFF":
+            print("\nCalculator turning OFF... Goodbye!")
+            break
+
+        elif choice.upper() == "C":
+            print("\nScreen cleared!\n" + "\n" * 2)
+            continue
+
+        elif choice in ['+', '-', '*', '/', '^', '%']:
+            try:
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+                result = calculate(num1, choice, num2)
+                print(f"\nResult: {num1} {choice} {num2} = {result}")
+            except ValueError:
+                print("\nInvalid input! Please enter valid numbers.")
+
+        else:
+            print("\nInvalid operator! Please choose from +, -, *, /, ^, %, C, OFF.")
+
+
+if __name__ == "__main__":
+    main()
