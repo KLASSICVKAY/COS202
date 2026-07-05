@@ -45,4 +45,4 @@ Total CGPA: 3.00 (Second Class Lower)
 ## Screenshots
 See attached images in this folder for sample program outputs.
 ![Uploading Screenshot_20260704-162221.png …]()
-
+<!-- Error while uploading Screenshot_20260704-162030.png -->
